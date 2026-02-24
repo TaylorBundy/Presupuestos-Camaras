@@ -52,5 +52,24 @@ function calcularTotales() {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
+function guardarEnSheets() {
+
+  const data = {
+    numero: "001",
+    fecha: new Date().toISOString().split("T")[0],
+    cliente: document.querySelector('input[placeholder="Cliente"]').value,
+    subtotal: document.getElementById("subtotal").innerText,
+    iva: document.getElementById("iva").innerText,
+    total: document.getElementById("total").innerText
+  };
+
+  fetch("PEGÁ_ACÁ_TU_URL_DE_APPS_SCRIPT", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(res => alert("Guardado en Google Sheets"));
+}
+
 // Crear una fila inicial
 agregarFila();
