@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Presupuesto - Instalación de Cámaras</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>PRESUPUESTO - INSTALACIÓN DE CÁMARAS</h1>
+
+    <div class="datos">
+      <input type="text" placeholder="Empresa">
+      <input type="date">
+      <input type="text" placeholder="Cliente">
+      <input type="number" placeholder="Validez (días)">
+      <input type="text" placeholder="Dirección">
+      <input type="text" placeholder="Teléfono">
+    </div>
+
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Costo Unit.</th>
+          <th>Ganancia %</th>
+          <th>Precio Venta</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+
+    <button onclick="agregarFila()">+ Agregar Ítem</button>
+
+    <div class="resumen">
+      <p>Subtotal: $ <span id="subtotal">0</span></p>
+      <p>IVA (21%): $ <span id="iva">0</span></p>
+      <h2>Total Final: $ <span id="total">0</span></h2>
+    </div>
+
+    <button onclick="window.print()">Imprimir / Guardar PDF</button>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
