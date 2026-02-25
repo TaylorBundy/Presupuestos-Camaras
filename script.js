@@ -71,5 +71,9 @@ function guardarEnSheets() {
   .then(res => alert("Guardado en Google Sheets"));
 }
 
+function abrirPlanilla() {
+  window.open("https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/edit?usp=drivesdk", "_blank");
+}
+
 // Crear una fila inicial
 agregarFila();
