@@ -72,7 +72,7 @@ function guardarEnSheets() {
 }
 
 function abrirPlanilla() {
-  window.open("https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/edit?usp=drivesdk", "_blank");
+  window.open("https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/edit", "_blank");
 }
 
 // Crear una fila inicial
