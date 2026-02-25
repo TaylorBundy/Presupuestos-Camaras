@@ -71,8 +71,20 @@ function guardarEnSheets() {
   .then(res => alert("Guardado en Google Sheets"));
 }
 
-function abrirPlanilla() {
-  window.open("https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/edit", "_blank");
+const URL_PUBLICA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgE1DqVMw248uPkR3_qg4HvYPEkPYSPysQsSRao_ErBWoLqQ3c3c0tAP7-pilizUNSUMMa4LfnODI/pubhtml";
+
+function mostrarPlanilla() {
+
+  const contenedor = document.getElementById("contenedorPlanilla");
+
+  contenedor.innerHTML = `
+    <iframe 
+      src="${URL_PUBLICA}" 
+      width="100%" 
+      height="600"
+      style="border:none;">
+    </iframe>
+  `;
 }
 
 // Crear una fila inicial
