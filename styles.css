@@ -68,3 +68,26 @@ button:hover {
   text-align: right;
   margin-top: 20px;
 }
+
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  #zonaPDF, #zonaPDF * {
+    visibility: visible;
+  }
+
+  #zonaPDF {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  button {
+    display: none;
+  }
+
+}
