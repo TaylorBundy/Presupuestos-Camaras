@@ -163,9 +163,10 @@ function mostrarPlanilla() {
       inputs[5].value = filas[4][4] || ""; // Teléfono
       inputs[2].value = filas[3][1] || ""; // Cliente
       //console.log(inputs);
-      const inputs2 = document.querySelectorAll(".resumen p");
-      inputs2[0].textContent = "";
-      inputs2[1].textContent = "";
+      const inputs2 = document.querySelectorAll(".resumen span");
+      inputs2[0].textContent = filas[24][5] || "";
+      inputs2[1].textContent = filas[25][5] || "";
+      inputs2[2].textContent = filas[26][5] || "";
       console.log(inputs2);
 
       // ==============================
