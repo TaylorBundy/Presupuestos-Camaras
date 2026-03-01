@@ -159,9 +159,9 @@ function mostrarPlanilla() {
 
       // Asignamos manualmente según posición
       inputs[0].value = filas[2][1] || ""; // Empresa
-      inputs[4].value = filas[2][3] || ""; // Dirección
-      inputs[5].value = filas[5][3] || ""; // Teléfono
-      inputs[2].value = filas[2][2] || ""; // Cliente
+      inputs[4].value = filas[4][1] || ""; // Dirección
+      inputs[5].value = filas[4][4] || ""; // Teléfono
+      inputs[2].value = filas[3][1] || ""; // Cliente
       console.log(inputs);
 
       // ==============================
