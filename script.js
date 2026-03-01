@@ -155,6 +155,7 @@ function mostrarPlanilla() {
       // ==============================
 
       const inputs = document.querySelectorAll(".datos input");
+      console.log(filas);
 
       // Asignamos manualmente según posición
       inputs[0].value = filas[0][1] || ""; // Empresa
