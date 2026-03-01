@@ -174,7 +174,7 @@ function mostrarPlanilla() {
       tbody.innerHTML = "";
 
       // Suponiendo que los datos empiezan en la fila 6
-      for (let i = 5; i < filas.length; i++) {
+      for (let i = 7; i < filas.length; i++) {
 
         if (filas[i].length < 2) continue;
 
