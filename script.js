@@ -176,7 +176,7 @@ function mostrarPlanilla() {
       const tabla = document.getElementById("tabla");
       const tbody = document.getElementById("tbody");
       const inicioTabla = 7;
-      const maxFilas = 22;
+      const maxFilas = 15;
 
       tbody.innerHTML = "";
 
