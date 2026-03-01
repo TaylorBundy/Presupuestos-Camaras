@@ -1,3 +1,27 @@
+document.getElementById("tabla").addEventListener("input", function(e) {
+
+  const celda = e.target;
+  const fila = celda.closest("tr");
+
+  if (!fila) return;
+
+  const celdas = fila.querySelectorAll("td");
+
+  if (celdas.length < 6) return;
+
+  const cantidad = parseFloat(celdas[1].querySelector("input")?.value) || 0;
+  const costo = parseFloat(celdas[2].querySelector("input")?.value) || 0;
+  const ganancia = parseFloat(celdas[3].querySelector("input")?.value) || 0;
+
+  const precioVenta = costo + (costo * ganancia / 100);
+  const subtotal = cantidad * precioVenta;
+
+  celdas[4].innerText = precioVenta.toFixed(2);
+  celdas[5].innerText = subtotal.toFixed(2);
+
+  recalcularResumen();
+});
+
 function agregarFila() {
   const tbody = document.getElementById("tbody");
 
@@ -209,6 +233,25 @@ function mostrarPlanilla() {
 
     })
     .catch(() => alert("Error cargando la hoja"));
+}
+
+function recalcularResumen() {
+
+  let subtotalGeneral = 0;
+
+  document.querySelectorAll("#tabla tbody tr").forEach(fila => {
+    const celdas = fila.querySelectorAll("td");
+    if (celdas.length >= 6) {
+      subtotalGeneral += parseFloat(celdas[5].innerText) || 0;
+    }
+  });
+
+  const iva = subtotalGeneral * 0.21;
+  const total = subtotalGeneral + iva;
+
+  document.getElementById("subtotal").innerText = subtotalGeneral.toFixed(2);
+  document.getElementById("iva").innerText = iva.toFixed(2);
+  document.getElementById("total").innerText = total.toFixed(2);
 }
 
 // Crear una fila inicial
