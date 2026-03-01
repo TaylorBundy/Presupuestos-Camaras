@@ -155,7 +155,7 @@ function mostrarPlanilla() {
       // ==============================
 
       const inputs = document.querySelectorAll(".datos input");
-      //console.log(filas);
+      console.log(filas);
 
       // Asignamos manualmente según posición
       inputs[0].value = filas[2][1] || ""; // Empresa
@@ -164,6 +164,8 @@ function mostrarPlanilla() {
       inputs[2].value = filas[3][1] || ""; // Cliente
       //console.log(inputs);
       const inputs2 = document.querySelectorAll(".resumen p");
+      inputs2[0].textContent = "";
+      inputs2[1].textContent = "";
       console.log(inputs2);
 
       // ==============================
