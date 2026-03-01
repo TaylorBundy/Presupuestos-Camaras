@@ -108,7 +108,7 @@ function mostrarPlanilla3() {
 
 const URL_CSV = "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
 
-function mostrarPlanilla() {
+function mostrarPlanilla4() {
 
   fetch(URL_CSV)
     .then(res => res.text())
@@ -135,6 +135,67 @@ function mostrarPlanilla() {
 
         tabla.appendChild(tr);
       });
+
+    })
+    .catch(() => alert("Error cargando la hoja"));
+}
+
+//const URL_CSV = "PEGÁ_ACÁ_TU_LINK_CSV";
+
+function mostrarPlanilla() {
+
+  fetch(URL_CSV)
+    .then(res => res.text())
+    .then(data => {
+
+      const filas = data.split("\n").map(fila => fila.split(","));
+
+      // ==============================
+      // 1️⃣ CARGAR DATOS DE EMPRESA
+      // ==============================
+
+      const inputs = document.querySelectorAll(".datos input");
+
+      // Asignamos manualmente según posición
+      inputs[0].value = filas[0][1] || ""; // Empresa
+      inputs[4].value = filas[1][1] || ""; // Dirección
+      inputs[5].value = filas[2][1] || ""; // Teléfono
+      inputs[2].value = filas[3][1] || ""; // Cliente
+
+      // ==============================
+      // 2️⃣ CARGAR TABLA
+      // ==============================
+
+      const tabla = document.getElementById("tabla");
+      const tbody = document.getElementById("tbody");
+
+      tbody.innerHTML = "";
+
+      // Suponiendo que los datos empiezan en la fila 6
+      for (let i = 5; i < filas.length; i++) {
+
+        if (filas[i].length < 2) continue;
+
+        const tr = document.createElement("tr");
+
+        filas[i].forEach((columna, index) => {
+
+          const td = document.createElement("td");
+
+          if (index < 4) {
+            const input = document.createElement("input");
+            input.value = columna;
+            input.type = "text";
+            td.appendChild(input);
+          } else {
+            td.innerText = columna;
+          }
+
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      }
 
     })
     .catch(() => alert("Error cargando la hoja"));
