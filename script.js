@@ -162,6 +162,7 @@ function mostrarPlanilla() {
       inputs[4].value = filas[2][3] || ""; // Dirección
       inputs[5].value = filas[5][3] || ""; // Teléfono
       inputs[2].value = filas[2][2] || ""; // Cliente
+      console.log(inputs);
 
       // ==============================
       // 2️⃣ CARGAR TABLA
