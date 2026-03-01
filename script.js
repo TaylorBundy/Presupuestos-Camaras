@@ -87,7 +87,7 @@ function guardarEnSheets() {
     total: document.getElementById("total").innerText
   };
 
-  fetch("PEGÁ_ACÁ_TU_URL_DE_APPS_SCRIPT", {
+  fetch("https://script.google.com/macros/s/AKfycbyPSiMH-9OD9yJlP6tbbDZb2feX_9gLfTparJMKvuapKq5yHTL34iwhi18JwDVmmbyLfA/exec", {
     method: "POST",
     body: JSON.stringify(data)
   })
