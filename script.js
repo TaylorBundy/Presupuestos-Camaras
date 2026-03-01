@@ -155,14 +155,16 @@ function mostrarPlanilla() {
       // ==============================
 
       const inputs = document.querySelectorAll(".datos input");
-      console.log(filas);
+      //console.log(filas);
 
       // Asignamos manualmente según posición
       inputs[0].value = filas[2][1] || ""; // Empresa
       inputs[4].value = filas[4][1] || ""; // Dirección
       inputs[5].value = filas[4][4] || ""; // Teléfono
       inputs[2].value = filas[3][1] || ""; // Cliente
-      console.log(inputs);
+      //console.log(inputs);
+      const inputs2 = document.querySelectorAll(".resumen p");
+      console.log(inputs2);
 
       // ==============================
       // 2️⃣ CARGAR TABLA
