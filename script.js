@@ -71,7 +71,8 @@ function guardarEnSheets() {
   .then(res => alert("Guardado en Google Sheets"));
 }
 
-const URL_PUBLICA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgE1DqVMw248uPkR3_qg4HvYPEkPYSPysQsSRao_ErBWoLqQ3c3c0tAP7-pilizUNSUMMa4LfnODI/pubhtml";
+const URL_PUBLICA2 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgE1DqVMw248uPkR3_qg4HvYPEkPYSPysQsSRao_ErBWoLqQ3c3c0tAP7-pilizUNSUMMa4LfnODI/pubhtml";
+const URL_PUBLICA = "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
 
 function mostrarPlanilla2() {
 
@@ -87,7 +88,7 @@ function mostrarPlanilla2() {
   `;
 }
 
-function mostrarPlanilla() {
+function mostrarPlanilla3() {
 
   const tabla = document.getElementById("tabla");
 
@@ -103,6 +104,40 @@ function mostrarPlanilla() {
       </td>
     </tr>
   `;
+}
+
+const URL_CSV = "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
+
+function mostrarPlanilla() {
+
+  fetch(URL_CSV)
+    .then(res => res.text())
+    .then(data => {
+
+      const filas = data.split("\n").map(fila => fila.split(","));
+      const tabla = document.getElementById("tabla");
+
+      tabla.innerHTML = "";
+
+      filas.forEach((fila, index) => {
+        const tr = document.createElement("tr");
+
+        fila.forEach(columna => {
+          const celda = document.createElement(index === 0 ? "th" : "td");
+
+          if (index !== 0) {
+            celda.contentEditable = "true"; // 👈 editable
+          }
+
+          celda.innerText = columna;
+          tr.appendChild(celda);
+        });
+
+        tabla.appendChild(tr);
+      });
+
+    })
+    .catch(() => alert("Error cargando la hoja"));
 }
 
 // Crear una fila inicial
