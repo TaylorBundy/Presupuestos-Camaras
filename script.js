@@ -175,11 +175,14 @@ function mostrarPlanilla() {
 
       const tabla = document.getElementById("tabla");
       const tbody = document.getElementById("tbody");
+      const inicioTabla = 7;
+      const maxFilas = 22;
 
       tbody.innerHTML = "";
 
       // Suponiendo que los datos empiezan en la fila 6
-      for (let i = 7; i < filas.length; i++) {
+      //for (let i = 7; i < filas.length; i++) {
+      for (let i = inicioTabla; i < filas.length && i < inicioTabla + maxFilas; i++) {
 
         if (filas[i].length < 2) continue;
 
