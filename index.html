@@ -8,6 +8,7 @@
 <body>
 
   <div class="container">
+    <div class="zonaPDF">
 
     <h1>PRESUPUESTO - INSTALACIÓN DE CÁMARAS</h1>
 
@@ -54,14 +55,13 @@
       </tbody>
     </table>
 
-    <button onclick="agregarFila()">+ Agregar Ítem</button>
-
     <div class="resumen">
       <p>Subtotal: $ <span id="subtotal">0</span></p>
       <p>IVA (21%): $ <span id="iva">0</span></p>
       <h2>Total Final: $ <span id="total">0</span></h2>
     </div>
-
+    </div>
+<button onclick="agregarFila()">+ Agregar Ítem</button>
     <button onclick="window.print()">Imprimir / Guardar PDF</button>
 
   </div>
