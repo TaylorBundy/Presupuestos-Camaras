@@ -73,7 +73,7 @@ function guardarEnSheets() {
 
 const URL_PUBLICA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgE1DqVMw248uPkR3_qg4HvYPEkPYSPysQsSRao_ErBWoLqQ3c3c0tAP7-pilizUNSUMMa4LfnODI/pubhtml";
 
-function mostrarPlanilla() {
+function mostrarPlanilla2() {
 
   const contenedor = document.getElementById("contenedorPlanilla");
 
@@ -84,6 +84,24 @@ function mostrarPlanilla() {
       height="600"
       style="border:none;">
     </iframe>
+  `;
+}
+
+function mostrarPlanilla() {
+
+  const tabla = document.getElementById("tabla");
+
+  tabla.innerHTML = `
+    <tr>
+      <td colspan="7" style="padding:0;">
+        <iframe 
+          src="${URL_PUBLICA}" 
+          width="100%" 
+          height="600"
+          style="border:none;">
+        </iframe>
+      </td>
+    </tr>
   `;
 }
 
