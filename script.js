@@ -1,5 +1,4 @@
-document.getElementById("tabla").addEventListener("input", function(e) {
-
+document.getElementById("tabla").addEventListener("input", function (e) {
   const celda = e.target;
   const fila = celda.closest("tr");
 
@@ -13,7 +12,7 @@ document.getElementById("tabla").addEventListener("input", function(e) {
   const costo = parseFloat(celdas[2].querySelector("input")?.value) || 0;
   const ganancia = parseFloat(celdas[3].querySelector("input")?.value) || 0;
 
-  const precioVenta = costo + (costo * ganancia / 100);
+  const precioVenta = costo + (costo * ganancia) / 100;
   const subtotal = cantidad * precioVenta;
 
   celdas[4].innerText = precioVenta.toFixed(2);
@@ -52,7 +51,7 @@ function calcular(input) {
   const costo = parseFloat(row.children[2].children[0].value) || 0;
   const ganancia = parseFloat(row.children[3].children[0].value) || 0;
 
-  const precioVenta = costo + (costo * ganancia / 100);
+  const precioVenta = costo + (costo * ganancia) / 100;
   const subtotal = cantidad * precioVenta;
 
   row.querySelector(".precio").innerText = precioVenta.toFixed(2);
@@ -64,7 +63,7 @@ function calcular(input) {
 function calcularTotales() {
   let subtotalGeneral = 0;
 
-  document.querySelectorAll(".subtotal").forEach(cell => {
+  document.querySelectorAll(".subtotal").forEach((cell) => {
     subtotalGeneral += parseFloat(cell.innerText) || 0;
   });
 
@@ -76,30 +75,79 @@ function calcularTotales() {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
-function guardarEnSheets() {
-
+function guardarEnSheets1() {
   const data = {
     numero: "001",
     fecha: new Date().toISOString().split("T")[0],
     cliente: document.querySelector('input[placeholder="Cliente"]').value,
     subtotal: document.getElementById("subtotal").innerText,
     iva: document.getElementById("iva").innerText,
-    total: document.getElementById("total").innerText
+    total: document.getElementById("total").innerText,
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbyPSiMH-9OD9yJlP6tbbDZb2feX_9gLfTparJMKvuapKq5yHTL34iwhi18JwDVmmbyLfA/exec", {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(res => res.text())
-  .then(res => alert("Guardado en Google Sheets"));
+  fetch(
+    "https://script.google.com/macros/s/AKfycbwxFeOPgGG2Kv1DBpnYv7kKzeUEMO8GBRmzzfFpG1ymBiQog_oL2kLvLn9M1LF9_l8j/exec",
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+    },
+  )
+    .then((res) => res.text())
+    .then((res) => alert("Guardado en Google Sheets"));
 }
 
-const URL_PUBLICA2 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgE1DqVMw248uPkR3_qg4HvYPEkPYSPysQsSRao_ErBWoLqQ3c3c0tAP7-pilizUNSUMMa4LfnODI/pubhtml";
-const URL_PUBLICA = "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
+function guardarEnSheets() {
+  const data = {
+    numero: generarNumero(),
+    fecha: new Date().toISOString().split("T")[0],
+    cliente:
+      document.querySelector('input[placeholder="Cliente"]').value ||
+      "Sin nombre",
+    subtotal: document.getElementById("subtotal").innerText,
+    iva: document.getElementById("iva").innerText,
+    total: document.getElementById("total").innerText,
+  };
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbwxJiT0OAmwblNRLWmV_uHsNgWdVCRtplRBiz8p67BtyIlPrXTQuqZg-26Y1DUaw617/exec",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    },
+  )
+    .then((res) => res.text())
+    .then((res) => {
+      console.log(res);
+      alert("Guardado en Google Sheets ✅");
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Error al guardar ❌");
+    });
+}
+
+function generarNumero() {
+  const now = new Date();
+  return (
+    "P-" +
+    now.getFullYear() +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0") +
+    "-" +
+    String(now.getHours()).padStart(2, "0") +
+    String(now.getMinutes()).padStart(2, "0")
+  );
+}
+
+const URL_PUBLICA2 =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgE1DqVMw248uPkR3_qg4HvYPEkPYSPysQsSRao_ErBWoLqQ3c3c0tAP7-pilizUNSUMMa4LfnODI/pubhtml";
+const URL_PUBLICA =
+  "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
 
 function mostrarPlanilla2() {
-
   const contenedor = document.getElementById("contenedorPlanilla");
 
   contenedor.innerHTML = `
@@ -113,7 +161,6 @@ function mostrarPlanilla2() {
 }
 
 function mostrarPlanilla3() {
-
   const tabla = document.getElementById("tabla");
 
   tabla.innerHTML = `
@@ -130,15 +177,19 @@ function mostrarPlanilla3() {
   `;
 }
 
-const URL_CSV = "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
+const URL_CSV =
+  "https://docs.google.com/spreadsheets/d/1wsIW8D9zabje4FP-Z16QJ0epbvidJhUV4x7xtrbjOrs/export?format=csv";
+const URL_CSV2 =
+  "https://docs.google.com/spreadsheets/d/1CmPscTsATWgvZuQ-Q6vQsBfzeXfMxWVETM133NmAEXM/export?format=csv";
+
+const URL_CSV3 =
+  "https://docs.google.com/spreadsheets/d/1GSEHM_9MjVqR3saRfxOxCiQ52Q7xAQYXrj0x1gmKpoQ/export?format=csv";
 
 function mostrarPlanilla4() {
-
   fetch(URL_CSV)
-    .then(res => res.text())
-    .then(data => {
-
-      const filas = data.split("\n").map(fila => fila.split(","));
+    .then((res) => res.text())
+    .then((data) => {
+      const filas = data.split("\n").map((fila) => fila.split(","));
       const tabla = document.getElementById("tabla");
 
       tabla.innerHTML = "";
@@ -146,7 +197,7 @@ function mostrarPlanilla4() {
       filas.forEach((fila, index) => {
         const tr = document.createElement("tr");
 
-        fila.forEach(columna => {
+        fila.forEach((columna) => {
           const celda = document.createElement(index === 0 ? "th" : "td");
 
           if (index !== 0) {
@@ -159,20 +210,20 @@ function mostrarPlanilla4() {
 
         tabla.appendChild(tr);
       });
-
     })
     .catch(() => alert("Error cargando la hoja"));
 }
 
 //const URL_CSV = "PEGÁ_ACÁ_TU_LINK_CSV";
+let enlace;
 
-function mostrarPlanilla() {
+function mostrarPlanilla(enlace, nombre) {
+  document.getElementById("nombreArchivo").innerText = nombre;
 
-  fetch(URL_CSV)
-    .then(res => res.text())
-    .then(data => {
-
-      const filas = data.split("\n").map(fila => fila.split(","));
+  fetch(enlace)
+    .then((res) => res.text())
+    .then((data) => {
+      const filas = data.split("\n").map((fila) => fila.split(","));
 
       // ==============================
       // 1️⃣ CARGAR DATOS DE EMPRESA
@@ -206,14 +257,16 @@ function mostrarPlanilla() {
 
       // Suponiendo que los datos empiezan en la fila 6
       //for (let i = 7; i < filas.length; i++) {
-      for (let i = inicioTabla; i < filas.length && i < inicioTabla + maxFilas; i++) {
-
+      for (
+        let i = inicioTabla;
+        i < filas.length && i < inicioTabla + maxFilas;
+        i++
+      ) {
         if (filas[i].length < 2) continue;
 
         const tr = document.createElement("tr");
 
         filas[i].forEach((columna, index) => {
-
           const td = document.createElement("td");
 
           if (index < 4) {
@@ -230,16 +283,14 @@ function mostrarPlanilla() {
 
         tbody.appendChild(tr);
       }
-
     })
     .catch(() => alert("Error cargando la hoja"));
 }
 
 function recalcularResumen() {
-
   let subtotalGeneral = 0;
 
-  document.querySelectorAll("#tabla tbody tr").forEach(fila => {
+  document.querySelectorAll("#tabla tbody tr").forEach((fila) => {
     const celdas = fila.querySelectorAll("td");
     if (celdas.length >= 6) {
       subtotalGeneral += parseFloat(celdas[5].innerText) || 0;
@@ -255,4 +306,44 @@ function recalcularResumen() {
 }
 
 // Crear una fila inicial
-agregarFila();
+//agregarFila();
+
+const URL_DRIVE =
+  "https://script.google.com/macros/s/AKfycbwxFeOPgGG2Kv1DBpnYv7kKzeUEMO8GBRmzzfFpG1ymBiQog_oL2kLvLn9M1LF9_l8j/exec";
+
+function listarArchivosDrive() {
+  fetch(URL_DRIVE)
+    .then((res) => res.json())
+    .then((data) => {
+      const tabla1 = document.getElementById("tabla1");
+      const tabla = document.getElementById("tabla");
+      const tbody1 = document.getElementById("tbody1");
+      const tbody = document.getElementById("tbody");
+
+      tbody1.innerHTML = "";
+
+      data.forEach((file) => {
+        const tr = document.createElement("tr");
+        const url_edit = file.url;
+        const url_edit2 = url_edit.split("/edit")[0];
+        const url_edit3 = url_edit2 + "/export?format=csv";
+        //console.log(url_edit.split("/edit"));
+        //console.log(url_edit2 + "/export?format=csv");
+        enlace = url_edit3;
+        //console.log(url_edit3);
+
+        tr.innerHTML = `
+          <td colspan="1">${file.nombre}</td>
+          <td colspan="2">
+            <!-- <a href="${file.url}" target="_blank">Abrir</a> -->
+            <!-- <td><button onclick="mostrarPlanilla(${enlace})">X</button></td> -->
+            <!-- <button onclick="mostrarPlanilla('${enlace}')">Cargar</button> -->
+            <button onclick="mostrarPlanilla('${enlace}', '${file.nombre}')">Cargar</button>
+          </td>
+        `;
+
+        tbody1.appendChild(tr);
+      });
+    })
+    .catch(() => alert("Error cargando archivos"));
+}

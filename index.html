@@ -1,75 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Presupuesto - Instalación de Cámaras</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Presupuesto - Instalación de Cámaras</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="zonaPDF">
+        <h1>PRESUPUESTO - INSTALACIÓN DE CÁMARAS</h1>
+        <div class="datos">
+          <div class="datos">
+            <label>Empresa:</label>
+            <input type="text" placeholder="Empresa" />
+          </div>
+          <div class="datos">
+            <label>Fecha:</label>
+            <input type="date" />
+          </div>
+          <div class="datos">
+            <label>Cliente:</label>
+            <input type="text" placeholder="Cliente" />
+          </div>
+          <div class="datos">
+            <label>Validez:</label>
+            <input type="number" placeholder="Validez (días)" />
+          </div>
+          <div class="datos">
+            <label>Dirección:</label>
+            <input type="text" placeholder="Dirección" />
+          </div>
+          <div class="datos">
+            <label>Teléfono:</label>
+            <input type="text" placeholder="Teléfono" />
+          </div>
+        </div>
 
-  <div class="container">
-    <div class="zonaPDF">
+        <table id="tabla1">
+          <thead>
+            <tr>
+              <th>Archivos</th>
+              <th>Enlaces</th>
+              <!-- <th>Costo Unit.</th>
+              <th>Ganancia %</th>
+              <th>Precio Venta</th>
+              <th>Subtotal</th> -->
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody1"></tbody>
+        </table>
 
-    <h1>PRESUPUESTO - INSTALACIÓN DE CÁMARAS</h1>
+        <h2
+          id="nombreArchivo"
+          style="text-align: center; margin-bottom: 10px"
+        ></h2>
+        <table id="tabla">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th>Cantidad</th>
+              <th>Costo Unit.</th>
+              <th>Ganancia %</th>
+              <th>Precio Venta</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
 
-    <div class="datos">
-      <div class="datos">
-      <label>Empresa:</label>
-      <input type="text" placeholder="Empresa">
+        <div class="resumen">
+          <p>Subtotal: $ <span id="subtotal">0</span></p>
+          <p>IVA (21%): $ <span id="iva">0</span></p>
+          <h2>Total Final: $ <span id="total">0</span></h2>
+        </div>
       </div>
-      <div class="datos">
-      <label>Fecha:</label>
-      <input type="date">
-      </div>
-      <div class="datos">
-      <label>Cliente:</label>
-      <input type="text" placeholder="Cliente">
-      </div>
-      <div class="datos">
-      <label>Validez:</label>
-      <input type="number" placeholder="Validez (días)">
-      </div>
-      <div class="datos">
-      <label>Dirección:</label>
-      <input type="text" placeholder="Dirección">
-      </div>
-      <div class="datos">
-      <label>Teléfono:</label>
-      <input type="text" placeholder="Teléfono">
-      </div>
+      <button onclick="agregarFila()">+ Agregar Ítem</button>
+      <button onclick="window.print()">Imprimir / Guardar PDF</button>
     </div>
+    <button onclick="guardarEnSheets()">Guardar en Google Sheets</button>
 
-    <table id="tabla">
-      <thead>
-        <tr>
-          <th>Descripción</th>
-          <th>Cantidad</th>
-          <th>Costo Unit.</th>
-          <th>Ganancia %</th>
-          <th>Precio Venta</th>
-          <th>Subtotal</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-      </tbody>
-    </table>
+    <button onclick="mostrarPlanilla()">Ver Planilla</button>
+    <button onclick="listarArchivosDrive()">Ver documentos</button>
 
-    <div class="resumen">
-      <p>Subtotal: $ <span id="subtotal">0</span></p>
-      <p>IVA (21%): $ <span id="iva">0</span></p>
-      <h2>Total Final: $ <span id="total">0</span></h2>
-    </div>
-    </div>
-<button onclick="agregarFila()">+ Agregar Ítem</button>
-    <button onclick="window.print()">Imprimir / Guardar PDF</button>
-
-  </div>
-<button onclick="guardarEnSheets()">Guardar en Google Sheets</button>
-
-<button onclick="mostrarPlanilla()">Ver Planilla</button>
-
-<div id="contenedorPlanilla" style="margin-top:20px;"></div>
-<script src="script.js"></script>
-</body>
+    <div id="contenedorPlanilla" style="margin-top: 20px"></div>
+    <script src="script.js"></script>
+  </body>
 </html>
