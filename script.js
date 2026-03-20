@@ -75,6 +75,9 @@ function calcularTotales() {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
+const url_app_script =
+  "https://script.google.com/macros/s/AKfycbwAIo-kh__E5wmDEWK7LrKNnfLzraDGcgnjF4xxv28brtssuYQ3XQFsoWjc5NSkvvOd/exec";
+
 function guardarEnSheets1() {
   const data = {
     numero: "001",
@@ -96,7 +99,7 @@ function guardarEnSheets1() {
     .then((res) => alert("Guardado en Google Sheets"));
 }
 
-function guardarEnSheets() {
+function guardarEnSheets2() {
   const data = {
     numero: generarNumero(),
     fecha: new Date().toISOString().split("T")[0],
@@ -140,6 +143,58 @@ function generarNumero() {
     String(now.getHours()).padStart(2, "0") +
     String(now.getMinutes()).padStart(2, "0")
   );
+}
+
+function obtenerItems() {
+  const filas = document.querySelectorAll("#tabla tbody tr");
+
+  const items = [];
+
+  filas.forEach((fila) => {
+    const celdas = fila.querySelectorAll("td");
+
+    items.push({
+      descripcion: celdas[0].innerText,
+      cantidad: Number(celdas[1].innerText),
+      costo_unitario: Number(celdas[2].innerText),
+      ganancia: Number(celdas[3].innerText),
+      precio_venta: Number(celdas[4].innerText),
+      subtotal: Number(celdas[5].innerText),
+    });
+  });
+
+  return items;
+}
+
+function guardarEnSheets() {
+  const data = {
+    numero: generarNumero(),
+    fecha: new Date().toISOString().split("T")[0],
+    cliente:
+      document.querySelector('input[placeholder="Cliente"]').value ||
+      "Sin nombre",
+    subtotal: Number(document.getElementById("subtotal").innerText),
+    iva: Number(document.getElementById("iva").innerText),
+    total: Number(document.getElementById("total").innerText),
+    items: obtenerItems(), // 👈 LA CLAVE
+  };
+
+  fetch(url_app_script, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.text())
+    .then((res) => {
+      console.log(res);
+      alert("Guardado en Google Sheets ✅");
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Error al guardar ❌");
+    });
 }
 
 const URL_PUBLICA2 =
@@ -312,7 +367,7 @@ const URL_DRIVE =
   "https://script.google.com/macros/s/AKfycbwxFeOPgGG2Kv1DBpnYv7kKzeUEMO8GBRmzzfFpG1ymBiQog_oL2kLvLn9M1LF9_l8j/exec";
 
 function listarArchivosDrive() {
-  fetch(URL_DRIVE)
+  fetch(url_app_script)
     .then((res) => res.json())
     .then((data) => {
       const tabla1 = document.getElementById("tabla1");
