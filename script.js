@@ -76,7 +76,7 @@ function calcularTotales() {
 }
 
 const url_app_script =
-  "https://script.google.com/macros/s/AKfycbwAIo-kh__E5wmDEWK7LrKNnfLzraDGcgnjF4xxv28brtssuYQ3XQFsoWjc5NSkvvOd/exec";
+  "https://script.google.com/macros/s/AKfycbzJjU4rWahJCwwAZ64w-cs7bgeIkg1uJrSKs20d-TuvRO0radEY-ozwcQc4d2hID61M/exec";
 
 function guardarEnSheets1() {
   const data = {
